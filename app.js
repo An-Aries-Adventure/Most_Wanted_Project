@@ -1,7 +1,5 @@
 "use strict"
-/*
-Build all of your functions for displaying and gathering information below (GUI).
-*/
+
 
 // app is the function called to start the entire application
 function app(people) {
@@ -12,16 +10,6 @@ function app(people) {
       searchResults = searchByName(people);
       break;
     case 'no':
-<<<<<<< HEAD
-
-=======
-      // TODO: search by traits
-      searchByTraits(people)
-      break;
-    default:
-      app(people); // restart app
-      break;
->>>>>>> 0e5978991026d28a26dbc312aaa7bf21c21359cc
   }
     default:
   app(people); // restart app
@@ -32,36 +20,36 @@ function app(people) {
 mainMenu(searchResults, people);
 }
 
-function searchByTraits(people){
+function searchByTraits(people) {
 
   //store similar traits to variable based on what the user entered
   let foundPeopleTraits = [];
   let searchPerson;
   let searchByGender;
   let searchByEyeColor;
-  
+
   let displayOption = parseInt(prompt("Press 1 to search by criteria or press 2 to search by name."));
 
-  if(displayOption === 1){
+  if (displayOption === 1) {
     searchByGender = prompt("Enter gender: ");
     searchByEyeColor = prompt("Enter eye color: ");
-  }else if(displayOption === 2){
+  } else if (displayOption === 2) {
     searchPerson = prompt("Enter the person's name you are searching for: ");
   }
 
   //loop through the array and find a match
-  for(let i = 0; i < people.length; i++){
+  for (let i = 0; i < people.length; i++) {
 
     //search by criteria
-    if(displayOption == 1 && searchByGender && searchByEyeColor){
-      if( people[i].gender == searchByGender && people[i].eyeColor == searchByEyeColor){
+    if (displayOption == 1 && searchByGender && searchByEyeColor) {
+      if (people[i].gender == searchByGender && people[i].eyeColor == searchByEyeColor) {
         foundPeopleTraits.push(people[i]);
       }
     }
 
     //search by name
-    if(displayOption == 2){
-      if(people[i].firstName === searchPerson || people[i].lastName === searchPerson){
+    if (displayOption == 2) {
+      if (people[i].firstName === searchPerson || people[i].lastName === searchPerson) {
         foundPeopleTraits.push(people[i]);
       }
     }
@@ -69,7 +57,7 @@ function searchByTraits(people){
 
   console.log('Total record found: ', foundPeopleTraits.length)
   let results = JSON.stringify(foundPeopleTraits);
-  
+
   alert(results);
 }
 
@@ -87,34 +75,26 @@ function mainMenu(person, people) {
 
   switch (displayOption) {
     case "info":
-<<<<<<< HEAD
       // TODO: get person's info
       break;
-=======
-      if (dispayOption == "info"){
-      console.log(displayPerson(person));
-      } // TODO: get person's info
-    break;
-
->>>>>>> 0e5978991026d28a26dbc312aaa7bf21c21359cc
     case "family":
-      if (displayOption == "family"){
+      if (displayOption == "family") {
         console.log(person.parents);
       } // TODO: get person's family
-    break;
+      break;
 
     case "descendants":
-    // TODO: get person's descendants
-    break;
+      // TODO: get person's descendants
+      break;
 
     case "restart":
-      if (displayOption == "restart"){
+      if (displayOption == "restart") {
         app(people); // restart
       }
-    break;
+      break;
 
     case "quit":
-      if (displayOption == "quit"){
+      if (displayOption == "quit") {
         return mainMenu(person, people);
       }
     // return; // stop execution
@@ -146,7 +126,6 @@ function displayPeople(people) {
   }).join("\n"));
 }
 
-<<<<<<< HEAD
 
 
 // height, gender, dob, weight, age, name, occupation, eyecolor
@@ -158,14 +137,6 @@ function displayPeople(people) {
 function displayPerson(person) {
   let attributes = personInfo;
 
-=======
-  // print all of the information about a person:
-  // height, weight, age, name, occupation, eye color.
-  // TODO: finish getting the rest of the information to display
-
-
-function displayPerson(person){
->>>>>>> 0e5978991026d28a26dbc312aaa7bf21c21359cc
   let personInfo = "First Name: " + person.firstName + "\n";
   personInfo += "Last Name: " + person.lastName + "\n";
   personInfo += "ID: " + person.id + "\n";
@@ -182,7 +153,7 @@ function displayPerson(person){
   let attributes = personInfo;
   console.log(attributes)
 }
-  // alert(personInfo)
+// alert(personInfo)
 
 // function that prompts and validates user input
 function promptFor(question, valid) {
