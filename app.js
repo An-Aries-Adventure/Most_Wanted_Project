@@ -79,10 +79,24 @@ function displayPeople(people){
 }
 
 function displayPerson(person){
+  let attributes = personInfo;
+   
+  // height, gender, dob, weight, age, name, occupation, eyecolor
   // print all of the information about a person:
   // height, weight, age, name, occupation, eye color.
   let personInfo = "First Name: " + person.firstName + "\n";
   personInfo += "Last Name: " + person.lastName + "\n";
+  personInfo += "Gender: " + person.gender + "\n";
+  personInfo += "DoB: " + person.dob + "\n";
+  personInfo += "Height: " + person.height + "\n"; 
+  personInfo += "Weight: " + person.weight + "\n";
+  personInfo += "Eye color: " + person.eyeColor + "\n";
+  personInfo += "Age: " + person.age + "\n"; 
+  personInfo += "Occupation" + person.occupation + "\n";
+  return attributes
+
+
+
   // TODO: finish getting the rest of the information to display
   alert(personInfo);
 }
