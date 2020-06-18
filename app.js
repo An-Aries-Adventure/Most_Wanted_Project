@@ -13,6 +13,7 @@ function app(people){
       break;
     case 'no':
       // TODO: search by traits
+      searchByTraits(people);
       break;
       default:
     app(people); // restart app
@@ -21,6 +22,47 @@ function app(people){
   
   // Call the mainMenu function ONLY after you find the SINGLE person you are looking for
   mainMenu(searchResults, people);
+}
+
+function searchByTraits(people){
+
+  //store similar traits to variable based on what the user entered
+  let foundPeopleTraits = [];
+  let searchPerson;
+  let searchByGender;
+  let searchByEyeColor;
+  
+  let displayOption = parseInt(prompt("Press 1 to search by criteria or press 2 to search by name."));
+
+  if(displayOption === 1){
+    searchByGender = prompt("Enter gender: ");
+    searchByEyeColor = prompt("Enter eye color: ");
+  }else if(displayOption === 2){
+    searchPerson = prompt("Enter the person's name you are searching for: ");
+  }
+
+  //loop through the array and find a match
+  for(let i = 0; i < people.length; i++){
+
+    //search by criteria
+    if(displayOption == 1 && searchByGender && searchByEyeColor){
+      if( people[i].gender == searchByGender && people[i].eyeColor == searchByEyeColor){
+        foundPeopleTraits.push(people[i]);
+      }
+    }
+
+    //search by name
+    if(displayOption == 2){
+      if(people[i].firstName === searchPerson || people[i].lastName === searchPerson){
+        foundPeopleTraits.push(people[i]);
+      }
+    }
+  }
+
+  console.log('Total record found: ', foundPeopleTraits.length)
+  let results = JSON.stringify(foundPeopleTraits);
+  
+  alert(results);
 }
 
 // Menu function to call once you find who you are looking for
