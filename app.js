@@ -79,7 +79,6 @@ function mainMenu(person, people) {
 
   switch (displayOption) {
     case "info":
-<<<<<<< HEAD
       if (dispayOption == "info"){
       console.log(displayPerson(person));
       } // TODO: get person's info
@@ -108,31 +107,6 @@ function mainMenu(person, people) {
     // return; // stop execution
     // default:
     // return mainMenu(person, people); // ask again
-=======
-      let resultsInfo = data.filter(function (el) {
-        return el.gender //el needs the criteria all calls
-        el.dob
-        el.height
-        el.weight
-        el.eyeColor
-        el.occupation
-
-      });
-      break;
-    case "family":
-      // TODO: get person's family
-      break;
-    case "descendants":
-      // TODO: get person's descendants
-      break;
-    case "restart":
-      app(people); // restart
-      break;
-    case "quit":
-      return; // stop execution
-    default:
-      return mainMenu(person, people); // ask again
->>>>>>> fe920f8d98ef671fbc66401a966b4bbf209f00fc
   }
 }
 
@@ -159,13 +133,6 @@ function displayPeople(people) {
   }).join("\n"));
 }
 
-<<<<<<< HEAD
-function displayPerson(person) {
-=======
-
-
-// height, gender, dob, weight, age, name, occupation, eyecolor
->>>>>>> 7ea389e0b9691e3efc0668722aa679b6928fc5a9
   // print all of the information about a person:
   // height, weight, age, name, occupation, eye color.
   // TODO: finish getting the rest of the information to display
