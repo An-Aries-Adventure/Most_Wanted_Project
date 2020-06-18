@@ -78,27 +78,32 @@ function displayPeople(people){
   }).join("\n"));
 }
 
-function displayPerson(person){
-  let attributes = personInfo;
-   
-  // height, gender, dob, weight, age, name, occupation, eyecolor
+
+
+// height, gender, dob, weight, age, name, occupation, eyecolor
   // print all of the information about a person:
   // height, weight, age, name, occupation, eye color.
+  // TODO: finish getting the rest of the information to display
+
+
+function displayPerson(person){
+  let attributes = personInfo;
+ 
   let personInfo = "First Name: " + person.firstName + "\n";
   personInfo += "Last Name: " + person.lastName + "\n";
+  personInfo += "ID: " + person.id + "\n";
   personInfo += "Gender: " + person.gender + "\n";
   personInfo += "DoB: " + person.dob + "\n";
   personInfo += "Height: " + person.height + "\n"; 
   personInfo += "Weight: " + person.weight + "\n";
   personInfo += "Eye color: " + person.eyeColor + "\n";
   personInfo += "Age: " + person.age + "\n"; 
-  personInfo += "Occupation" + person.occupation + "\n";
+  personInfo += "Occupation: " + person.occupation + "\n";
+  personInfo += "Parents: " + person.parents + "\n"
+  personInfo += "Current Spouse" + person.currentSpouse + "\n"
   return attributes
 
-
-
-  // TODO: finish getting the rest of the information to display
-  alert(personInfo);
+  // alert(personInfo);
 }
 
 // function that prompts and validates user input
