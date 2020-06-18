@@ -10,23 +10,19 @@ function app(people) {
       searchResults = searchByName(people);
       break;
     case 'no':
-<<<<<<< HEAD
-  }
-=======
       // TODO: search by traits
       searchByTraits(people)
       break;
     default:
       app(people); // restart app
       break;
->>>>>>> a808a50f23b2cf6f5d17d49be9712985b4a03878
     default:
-  app(people); // restart app
-  break;
-}
+      app(people); // restart app
+      break;
+  }
 
-// Call the mainMenu function ONLY after you find the SINGLE person you are looking for
-mainMenu(searchResults, people);
+  // Call the mainMenu function ONLY after you find the SINGLE person you are looking for
+  mainMenu(searchResults, people);
 }
 
 function searchByTraits(people) {
@@ -84,15 +80,8 @@ function mainMenu(person, people) {
 
   switch (displayOption) {
     case "info":
-<<<<<<< HEAD
       // TODO: get person's info
       break;
-=======
-      if (dispayOption == "info"){
-      console.log(displayPerson(person));
-      } // TODO: get person's info
-    break;
->>>>>>> a808a50f23b2cf6f5d17d49be9712985b4a03878
     case "family":
       if (displayOption == "family") {
         console.log(person.parents);
@@ -142,29 +131,19 @@ function displayPeople(people) {
   }).join("\n"));
 }
 
-<<<<<<< HEAD
 
 
-=======
->>>>>>> a808a50f23b2cf6f5d17d49be9712985b4a03878
 // height, gender, dob, weight, age, name, occupation, eyecolor
 // print all of the information about a person:
 // height, weight, age, name, occupation, eye color.
 // TODO: finish getting the rest of the information to display
 
-<<<<<<< HEAD
+// print all of the information about a person:
+// height, weight, age, name, occupation, eye color.
+// TODO: finish getting the rest of the information to display
+
 
 function displayPerson(person) {
-  let attributes = personInfo;
-
-=======
-  // print all of the information about a person:
-  // height, weight, age, name, occupation, eye color.
-  // TODO: finish getting the rest of the information to display
-
-
-function displayPerson(person){
->>>>>>> a808a50f23b2cf6f5d17d49be9712985b4a03878
   let personInfo = "First Name: " + person.firstName + "\n";
   personInfo += "Last Name: " + person.lastName + "\n";
   personInfo += "ID: " + person.id + "\n";
