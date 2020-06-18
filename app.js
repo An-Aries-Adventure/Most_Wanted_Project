@@ -37,21 +37,34 @@ function mainMenu(person, people){
 
   switch(displayOption){
     case "info":
-    // TODO: get person's info
+      if (dispayOption == "info"){
+      console.log(displayPerson(person));
+      } // TODO: get person's info
     break;
+
     case "family":
-    // TODO: get person's family
+      if (displayOption == "family"){
+        console.log(person.parents);
+      } // TODO: get person's family
     break;
+
     case "descendants":
     // TODO: get person's descendants
     break;
+
     case "restart":
-    app(people); // restart
+      if (displayOption == "restart"){
+        app(people); // restart
+      }
     break;
+
     case "quit":
-    return; // stop execution
-    default:
-    return mainMenu(person, people); // ask again
+      if (displayOption == "quit"){
+        return mainMenu(person, people);
+      }
+    // return; // stop execution
+    // default:
+    // return mainMenu(person, people); // ask again
   }
 }
 
@@ -87,8 +100,6 @@ function displayPeople(people){
 
 
 function displayPerson(person){
-  let attributes = personInfo;
- 
   let personInfo = "First Name: " + person.firstName + "\n";
   personInfo += "Last Name: " + person.lastName + "\n";
   personInfo += "ID: " + person.id + "\n";
@@ -101,10 +112,11 @@ function displayPerson(person){
   personInfo += "Occupation: " + person.occupation + "\n";
   personInfo += "Parents: " + person.parents + "\n"
   personInfo += "Current Spouse" + person.currentSpouse + "\n"
-  return attributes
 
-  // alert(personInfo);
+  let attributes = personInfo;
+  console.log(attributes)
 }
+  // alert(personInfo)
 
 // function that prompts and validates user input
 function promptFor(question, valid){
