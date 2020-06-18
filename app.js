@@ -179,3 +179,22 @@ function yesNo(input) {
 function chars(input) {
   return true; // default validation only
 }
+
+
+
+function relativesOfFoundPerson(){
+  let relativeSearch = prompt("Would you like to see the relatives of this person? Please type Yes or No.")
+  if (relativeSearch == "yes" || relativeSearch == "Yes"){
+    for (let i = 0; i < people.length; i++);
+      if (person.id === person.currentSpouse){
+      let spouseName = person.firstName[i] + " " + person.lastName[i];
+      return spouseName  
+    };
+  if 
+  
+
+
+
+
+  }
+}
