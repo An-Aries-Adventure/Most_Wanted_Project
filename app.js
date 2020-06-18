@@ -12,15 +12,15 @@ function app(people) {
       searchResults = searchByName(people);
       break;
     case 'no':
-      // TODO: search by traits
-      break;
-    default:
-      app(people); // restart app
-      break;
-  }
 
-  // Call the mainMenu function ONLY after you find the SINGLE person you are looking for
-  mainMenu(searchResults, people);
+  }
+    default:
+  app(people); // restart app
+  break;
+}
+
+// Call the mainMenu function ONLY after you find the SINGLE person you are looking for
+mainMenu(searchResults, people);
 }
 
 // Menu function to call once you find who you are looking for
@@ -37,15 +37,7 @@ function mainMenu(person, people) {
 
   switch (displayOption) {
     case "info":
-      let resultsInfo = data.filter(function (el) {
-        return el.gender //el needs the criteria all calls
-        el.dob
-        el.height
-        el.weight
-        el.eyeColor
-        el.occupation
-
-      });
+      // TODO: get person's info
       break;
     case "family":
       // TODO: get person's family
@@ -86,30 +78,26 @@ function displayPeople(people) {
   }).join("\n"));
 }
 
-<<<<<<< HEAD
-function displayPerson(person) {
-=======
 
 
 // height, gender, dob, weight, age, name, occupation, eyecolor
->>>>>>> 7ea389e0b9691e3efc0668722aa679b6928fc5a9
-  // print all of the information about a person:
-  // height, weight, age, name, occupation, eye color.
-  // TODO: finish getting the rest of the information to display
+// print all of the information about a person:
+// height, weight, age, name, occupation, eye color.
+// TODO: finish getting the rest of the information to display
 
 
-function displayPerson(person){
+function displayPerson(person) {
   let attributes = personInfo;
- 
+
   let personInfo = "First Name: " + person.firstName + "\n";
   personInfo += "Last Name: " + person.lastName + "\n";
   personInfo += "ID: " + person.id + "\n";
   personInfo += "Gender: " + person.gender + "\n";
   personInfo += "DoB: " + person.dob + "\n";
-  personInfo += "Height: " + person.height + "\n"; 
+  personInfo += "Height: " + person.height + "\n";
   personInfo += "Weight: " + person.weight + "\n";
   personInfo += "Eye color: " + person.eyeColor + "\n";
-  personInfo += "Age: " + person.age + "\n"; 
+  personInfo += "Age: " + person.age + "\n";
   personInfo += "Occupation: " + person.occupation + "\n";
   personInfo += "Parents: " + person.parents + "\n"
   personInfo += "Current Spouse" + person.currentSpouse + "\n"
