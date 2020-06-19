@@ -10,11 +10,8 @@ function app(people) {
       searchResults = searchByName(people);
       break;
     case 'no':
-      // TODO: search by traits
+      // TODO: search by traits.
       searchByTraits(people)
-      break;
-    default:
-      app(people); // restart app
       break;
     default:
       app(people); // restart app
@@ -90,6 +87,9 @@ function mainMenu(person, people) {
 
     case "descendants":
       // TODO: get person's descendants
+
+
+
       break;
 
     case "restart":
@@ -138,7 +138,7 @@ function displayPeople(people) {
 // height, weight, age, name, occupation, eye color.
 // TODO: finish getting the rest of the information to display
 
-// print all of the information about a person:
+// print all of the information about a person
 // height, weight, age, name, occupation, eye color.
 // TODO: finish getting the rest of the information to display
 
@@ -161,6 +161,15 @@ function displayPerson(person) {
   console.log(attributes)
 }
 // alert(personInfo)
+
+
+
+
+
+
+
+
+
 
 // function that prompts and validates user input
 function promptFor(question, valid) {
