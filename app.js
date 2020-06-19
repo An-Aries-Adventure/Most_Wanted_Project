@@ -182,31 +182,16 @@ function chars(input) {
 
 
 
-function spouseOfFoundPerson(){
-  let spouseSearch = prompt("Would you like to see the spouse of this person? Please type Yes or No.")
-  if (spouseSearch == "yes" || spouseSearch == "Yes"){
-    for (let i = 0; i < people.length; i++);
-      if (person.id === person.currentSpouse){
-        let spouseName = person.firstName[i] + " " + person.lastName[i];
-        return spouseName; 
-      }
-      else {
-        return ("This person does not have a spouse.");
-      }
-    }
-  else {
-    break;
-  }
-}
 
 
 
-function parentsOfFoundPerson(){
-  let parentSearch = prompt("Would you like to see the parents of this person? Please type Yes or No. ")
+let parentSearch
+function parentsOfFoundPerson(people, person){
+   parentSearch = prompt("Would you like to see the parents of this person? Please type Yes or No. ")
   if (parentSearch == "yes" || parentSearch == "Yes"){
-    for (let i = 0; i < parents.length; i++);
-      if (parents[i] === person.id){
-        let parentsName = person.firstName[i] + " " + person.lastName[i];
+    for (let i = 0; i < people.length; i++);
+      if (people[i] === person.id){
+        let parentsName = person[i].firstName + " " + person[i].lastName;
         return parentsName; 
       }
       else {
