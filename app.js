@@ -182,19 +182,35 @@ function chars(input) {
 
 
 
-function relativesOfFoundPerson(){
-  let relativeSearch = prompt("Would you like to see the relatives of this person? Please type Yes or No.")
-  if (relativeSearch == "yes" || relativeSearch == "Yes"){
+function spouseOfFoundPerson(){
+  let spouseSearch = prompt("Would you like to see the spouse of this person? Please type Yes or No.")
+  if (spouseSearch == "yes" || spouseSearch == "Yes"){
     for (let i = 0; i < people.length; i++);
       if (person.id === person.currentSpouse){
-      let spouseName = person.firstName[i] + " " + person.lastName[i];
-      return spouseName  
-    };
-  if 
-  
-
-
-
-
+        let spouseName = person.firstName[i] + " " + person.lastName[i];
+        return spouseName; 
+      }
+      else {
+        return ("This person does not have a spouse.");
+      }
+    }
+  else {
+    break;
   }
 }
+
+
+
+function parentsOfFoundPerson(){
+  let parentSearch = prompt("Would you like to see the parents of this person? Please type Yes or No. ")
+  if (parentSearch == "yes" || parentSearch == "Yes"){
+    for (let i = 0; i < parents.length; i++);
+      if (parents[i] === person.id){
+        let parentsName = person.firstName[i] + " " + person.lastName[i];
+        return parentsName; 
+      }
+      else {
+        return ("The parents of this person cannot be found.")
+      }
+    }
+  }
