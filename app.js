@@ -1,5 +1,7 @@
 "use strict"
-
+/*
+Build all of your functions for displaying and gathering information below (GUI).
+*/
 
 // app is the function called to start the entire application
 function app(people) {
@@ -22,46 +24,65 @@ function app(people) {
   mainMenu(searchResults, people);
 }
 
-function searchByTraits(people) {
+function searchByTraits(people){
 
   //store similar traits to variable based on what the user entered
   let foundPeopleTraits = [];
   let searchPerson;
   let searchByGender;
   let searchByEyeColor;
-
+  
   let displayOption = parseInt(prompt("Press 1 to search by criteria or press 2 to search by name."));
 
-  if (displayOption === 1) {
+  if(displayOption === 1){
     searchByGender = prompt("Enter gender: ");
     searchByEyeColor = prompt("Enter eye color: ");
-  } else if (displayOption === 2) {
+  }else if(displayOption === 2){
     searchPerson = prompt("Enter the person's name you are searching for: ");
   }
 
   //loop through the array and find a match
-  for (let i = 0; i < people.length; i++) {
+  for(let i = 0; i < people.length; i++){
 
     //search by criteria
-    if (displayOption == 1 && searchByGender && searchByEyeColor) {
-      if (people[i].gender == searchByGender && people[i].eyeColor == searchByEyeColor) {
+    if(displayOption == 1 && searchByGender && searchByEyeColor){
+      if( people[i].gender == searchByGender && people[i].eyeColor == searchByEyeColor){
         foundPeopleTraits.push(people[i]);
       }
     }
 
     //search by name
-    if (displayOption == 2) {
-      if (people[i].firstName === searchPerson || people[i].lastName === searchPerson) {
+    if(displayOption == 2){
+      if(people[i].firstName === searchPerson || people[i].lastName === searchPerson){
         foundPeopleTraits.push(people[i]);
       }
     }
   }
 
-  console.log('Total record found: ', foundPeopleTraits.length)
+  console.log('Total record found: ', foundPeopleTraits)
   let results = JSON.stringify(foundPeopleTraits);
-
+  
   alert(results);
 }
+
+
+let getDescendants = function(people, person, count = people.length - 1, descendants = "") {
+
+  //get value from the person you are searching
+  let userId = person[0].id;
+
+  if (count > 0) {
+      if(people[count].parents.includes(userId)){
+        let descendentFound = people[count].firstName + ' ' + people[count].lastName + ', ';
+        descendants += descendentFound;
+      }
+      
+      return getDescendants(people, person, count - 1, descendants);
+  } else {
+      return descendants;
+  }
+
+};
 
 // Menu function to call once you find who you are looking for
 function mainMenu(person, people) {
@@ -73,33 +94,41 @@ function mainMenu(person, people) {
     return app(people); // restart
   }
 
-  let displayOption = prompt("Found " + person.firstName + " " + person.lastName + " . Do you want to know their 'info', 'family', or 'descendants'? Type the option you want or 'restart' or 'quit'");
+  let displayOption = prompt("Found " + person[0].firstName + " " + person[0].lastName + " . Do you want to know their 'info', 'family', or 'descendants'? Type the option you want or 'restart' or 'quit'");
 
   switch (displayOption) {
     case "info":
+      console.log(displayPerson(person));
       // TODO: get person's info
-      break;
+    break;
     case "family":
-      if (displayOption == "family") {
-        console.log(person.parents);
+      if (displayOption == "family"){
+        //getFamily(people, person)
+        console.log(spouseOfFoundPerson(people, person))
       } // TODO: get person's family
-      break;
+    break;
 
     case "descendants":
+<<<<<<< HEAD
       // TODO: get person's descendants
 
 
 
       break;
+=======
+    // TODO: get person's descendants
+    console.log(getDescendants(people, person))
+    break;
+>>>>>>> 56f8e9fa93c2ac9298181d5ab74858ede64734be
 
     case "restart":
-      if (displayOption == "restart") {
+      if (displayOption == "restart"){
         app(people); // restart
       }
-      break;
+    break;
 
     case "quit":
-      if (displayOption == "quit") {
+      if (displayOption == "quit"){
         return mainMenu(person, people);
       }
     // return; // stop execution
@@ -108,6 +137,24 @@ function mainMenu(person, people) {
   }
 }
 
+
+function spouseOfFoundPerson(people, person){
+  person[0].currentSpouse
+  let spouseSearch = prompt("Would you like to see the spouse of this person? Please type Yes or No.")
+  let spouseName = 'This person does not have a spouse.'; 
+
+  if (spouseSearch == "yes" || spouseSearch == "Yes"){
+    for (let i = 0; i < people.length; i++){
+      if(people[i].id === person[0].currentSpouse){
+        spouseName = people[i].firstName + " " + people[i].lastName;
+      }
+    }
+  }
+  return spouseName;
+}
+
+
+  // TODO: find the person using the name they entered
 function searchByName(people) {
   let firstName = promptFor("What is the person's first name?", chars);
   let lastName = promptFor("What is the person's last name?", chars);
@@ -120,7 +167,8 @@ function searchByName(people) {
       return false;
     }
   })
-  // TODO: find the person using the name they entered
+
+  console.log('foundPerson', foundPerson)
   return foundPerson;
 }
 
@@ -131,8 +179,6 @@ function displayPeople(people) {
   }).join("\n"));
 }
 
-
-
 // height, gender, dob, weight, age, name, occupation, eyecolor
 // print all of the information about a person:
 // height, weight, age, name, occupation, eye color.
@@ -142,8 +188,10 @@ function displayPeople(people) {
 // height, weight, age, name, occupation, eye color.
 // TODO: finish getting the rest of the information to display
 
+function displayPerson(person){
 
-function displayPerson(person) {
+  person = person[0];
+
   let personInfo = "First Name: " + person.firstName + "\n";
   personInfo += "Last Name: " + person.lastName + "\n";
   personInfo += "ID: " + person.id + "\n";
@@ -152,15 +200,12 @@ function displayPerson(person) {
   personInfo += "Height: " + person.height + "\n";
   personInfo += "Weight: " + person.weight + "\n";
   personInfo += "Eye color: " + person.eyeColor + "\n";
-  personInfo += "Age: " + person.age + "\n";
   personInfo += "Occupation: " + person.occupation + "\n";
   personInfo += "Parents: " + person.parents + "\n"
   personInfo += "Current Spouse" + person.currentSpouse + "\n"
 
-  let attributes = personInfo;
-  console.log(attributes)
+  console.log('personInfo', personInfo)
 }
-// alert(personInfo)
 
 
 
