@@ -247,27 +247,28 @@ function chars(input) {
 
 
 function parentsOfFoundPerson(people, person){
+  
+  person = person[0].parents
+  console.log('check length of person', person)
+  let foundParents = []
+  if (person.length > 0){
+    let parentSearch = prompt("Would you like to see the parents of this person? Please type Yes or No. ");
+    if (parentSearch == "yes" || parentSearch == "Yes"){
+      for (let i = 0; i < people.length; i++){
 
-//person[0].parents
-if (person.parents.length > 0){
-  let parentSearch = prompt("Would you like to see the parents of this person? Please type Yes or No. ")
-  if (parentSearch == "yes" || parentSearch == "Yes"){
-    for (let i = 0; i < people.length; i++){
-      if (people[i].id === person.parents[0]){
-      let firstParentsName = people[i].firstName + " " + people[i].lastName;
-        return firstParentsName;
+        for(let p = 0; p < person.length; p++){
+
+          if (people[i].id === person[p]){
+            let firstParentsName = people[i].firstName + " " + people[i].lastName;
+            foundParents.push(firstParentsName)
+          }
+
+        }
       }
-      if (people[i].id === person.parents[1]){
-        let secondParentsName = people[i].firstName + " " + people[i].lastName;
-          return secondParentsName
-      }
-      else {
-        return ("This person only has one parent.")
-      }
-    }
-  } 
-}
-else {
-  console.log("Sorry, there are no parents to find.")
-}
+    } 
+  } else {
+    foundParents = ("Sorry, there are no parents to find.");
+  }
+  
+  return foundParents
 }
