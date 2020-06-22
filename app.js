@@ -245,20 +245,29 @@ function chars(input) {
 
 
 
-let parentSearch
-let parentsName
+
 function parentsOfFoundPerson(people, person){
-  person[0].parents
-   parentSearch = prompt("Would you like to see the parents of this person? Please type Yes or No. ")
+
+//person[0].parents
+if (person.parents.length > 0){
+  let parentSearch = prompt("Would you like to see the parents of this person? Please type Yes or No. ")
   if (parentSearch == "yes" || parentSearch == "Yes"){
-    for (let i = 0; i < people.length; i++);
-      if (people[i].id === person[0].parents){
-        parentsName = people[i].firstName + " " + people[i].lastName;
-        return parentsName;
+    for (let i = 0; i < people.length; i++){
+      if (people[i].id === person.parents[0]){
+      let firstParentsName = people[i].firstName + " " + people[i].lastName;
+        return firstParentsName;
+      }
+      if (people[i].id === person.parents[1]){
+        let secondParentsName = people[i].firstName + " " + people[i].lastName;
+          return secondParentsName
       }
       else {
-        return ("The parents of this person cannot be found.")
+        return ("This person only has one parent.")
       }
     }
   } 
-
+}
+else {
+  console.log("Sorry, there are no parents to find.")
+}
+}
