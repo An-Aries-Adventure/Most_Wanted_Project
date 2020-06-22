@@ -146,17 +146,17 @@ function spouseOfFoundPerson(people, person) {
 }
 function siblingOfFoundPerson(people, person) {
   person[0].sibling
-  let spouseSearch = prompt("Would you like to see the spouse of this person? Please type Yes or No.")
-  let spouseName = 'This person does not have a spouse.';
+  let siblingSearch = prompt("Would you like to see the siblings of this person? Please type Yes or No.")
+  let siblingName = 'This person has no siblings.';
 
-  if (spouseSearch == "yes" || spouseSearch == "Yes") {
+  if (siblingSearch == "yes" || siblingSearch == "Yes") {
     for (let i = 0; i < people.length; i++) {
-      if (people[i].id === person[0].currentSpouse) {
-        spouseName = people[i].firstName + " " + people[i].lastName;
+      if (people[i].parents === person[0].parents) {
+        siblingName = people[i].firstName + " " + people[i].lastName;
       }
     }
   }
-  return spouseName;
+  return siblingName;
 }
 
 // TODO: find the person using the name they entered
@@ -237,4 +237,24 @@ function yesNo(input) {
 // helper function to pass in as default promptFor validation
 function chars(input) {
   return true; // default validation only
+}
+
+
+
+
+
+
+let parentSearch
+function parentsOfFoundPerson(people, person) {
+  parentSearch = prompt("Would you like to see the parents of this person? Please type Yes or No. ")
+  if (parentSearch == "yes" || parentSearch == "Yes") {
+    for (let i = 0; i < people.length; i++);
+    if (people[i] === person.id) {
+      let parentsName = person[i].firstName + " " + person[i].lastName;
+      return parentsName;
+    }
+    else {
+      return ("The parents of this person cannot be found.")
+    }
+  }
 }
