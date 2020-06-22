@@ -89,7 +89,7 @@ function mainMenu(person, people) {
 
   /* Here we pass in the entire person object that we found in our search, as well as the entire original dataset of people. We need people in order to find descendants and other information that the user may want. */
 
-  if (!person) {
+  if (!person || !person[0]) {
     alert("Could not find that individual.");
     return app(people); // restart
   }
@@ -105,6 +105,7 @@ function mainMenu(person, people) {
       if (displayOption == "family"){
         //getFamily(people, person)
         console.log(spouseOfFoundPerson(people, person))
+        console.log(parentsOfFoundPerson(people,person))
       } // TODO: get person's family
     break;
 
@@ -232,16 +233,19 @@ function chars(input) {
 
 
 let parentSearch
+let parentsName
 function parentsOfFoundPerson(people, person){
+  person[0].parents
    parentSearch = prompt("Would you like to see the parents of this person? Please type Yes or No. ")
   if (parentSearch == "yes" || parentSearch == "Yes"){
     for (let i = 0; i < people.length; i++);
-      if (people[i] === person.id){
-        let parentsName = person[i].firstName + " " + person[i].lastName;
-        return parentsName; 
+      if (people[i].id === person[0].parents){
+        parentsName = people[i].firstName + " " + people[i].lastName;
+        return parentsName;
       }
       else {
         return ("The parents of this person cannot be found.")
       }
     }
-  }
+  } 
+
