@@ -87,13 +87,13 @@ let getDescendants = function(people, person, count = people.length - 1, descend
   if (count > 0) {
       if(people[count].parents.includes(userId)){
         let descendentFound = people[count].firstName + ' ' + people[count].lastName;
-        descendants.push({children:descendentFound, currentSpouce: people[count].currentSpouse});
+        descendants.push({children:descendentFound, currentSpouse: people[count].currentSpouse});
       }
       return getDescendants(people, person, count - 1, descendants);
   } else {
     for(let i = 0; i < people.length; i++){
       for(let p = 0; p < descendants.length; p++){
-        if(people[i].parents.includes(descendants[p].currentSpouce)){
+        if(people[i].parents.includes(descendants[p].currentSpouse)){
           let descendentFound = people[i].firstName + ' ' + people[i].lastName;
           descendants.push({children:descendentFound});
         }
@@ -158,7 +158,14 @@ function spouseOfFoundPerson(people, person) {
         spouseName = people[i].firstName + " " + people[i].lastName;
       }
     }
+  }else if(spouseSearch == "no" || spouseSearch == "No"){
+    return
+  }else{
+    spouseOfFoundPerson(people, person);
+    return
   }
+
+  alert('Spouse name is ' + spouseName)
   return spouseName;
 }
 
