@@ -199,23 +199,30 @@ function siblingOfFoundPerson(people, person) {
 }
 
 function parentsOfFoundPerson(people, person){
-  person = person[0].parents
-  let foundParents = []
-  if (person.length > 0){
+  
+  let foundParents = "";
+  if (person[0].parents.length > 0){
     let parentSearch = prompt("Would you like to see the parents of this person? Please type Yes or No. ");
      if (parentSearch == "yes" || parentSearch == "Yes"){
       for (let i = 0; i < people.length; i++){
-        for(let p = 0; p < person.length; p++){
-          if (people[i].id === person[p]){
+        for(let p = 0; p < person[0].parents.length; p++){
+          if (people[i].id === person[0].parents[p]){
             let parentsName = people[i].firstName + " " + people[i].lastName;
-            foundParents.push(parentsName);
+            foundParents += parentsName + ', ';
           }
         }    
       } 
-    } 
+    }else if (parentSearch == "no" || parentSearch == "No"){
+      return;
+    }else{
+      parentsOfFoundPerson(people, person);
+      return
+    }
   } else {
     foundParents = ("Sorry, there are no parents to find.");
   }
+
+  alert('Parents Name: ' + foundParents);
   return foundParents;
 }
 
