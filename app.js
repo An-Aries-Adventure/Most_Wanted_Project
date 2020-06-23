@@ -259,7 +259,7 @@ function parentsOfFoundPerson(people, person){
 
           if (people[i].id === person[p]){
             let parentsName = people[i].firstName + " " + people[i].lastName;
-            foundParents.push(parentsName)
+            foundParents.push(parentsName);
           }
 
         }    
@@ -269,5 +269,5 @@ function parentsOfFoundPerson(people, person){
     foundParents = ("Sorry, there are no parents to find.");
   }
 
-  return foundParents
+  return foundParents;
 } 
