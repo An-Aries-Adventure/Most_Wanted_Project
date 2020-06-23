@@ -150,7 +150,7 @@ function mainMenu(person, people) {
     case "family":
       if (displayOption == "family"){
         //getFamily(people, person)
-        console.log(spouseOfFoundPerson(people, person))
+        console.log(siblingOfFoundPerson(people, person))
       } // TODO: get person's family
     break;
 
@@ -174,6 +174,7 @@ function mainMenu(person, people) {
     return mainMenu(person, people); // ask again
   }
 }
+
 
 function spouseOfFoundPerson(people, person) {
   person[0].currentSpouse
