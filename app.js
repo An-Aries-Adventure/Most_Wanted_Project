@@ -95,10 +95,12 @@ let getDescendants = function(people, person, count = people.length - 1, descend
       for(let p = 0; p < descendants.length; p++){
         if(people[i].parents.includes(descendants[p].currentSpouse)){
           let descendentFound = people[i].firstName + ' ' + people[i].lastName;
-          descendants.push({children:descendentFound});
+          descendants.push({grandChild:descendentFound});
         }
       }
     }
+
+    alert(JSON.stringify(descendants))
     return descendants;
   }
 };
