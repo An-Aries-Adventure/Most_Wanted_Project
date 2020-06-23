@@ -171,10 +171,9 @@ function spouseOfFoundPerson(people, person) {
 
 function siblingOfFoundPerson(people, person) {
   
-  let siblingSearch = prompt("Would you like to see the siblings of this person? Please type Yes or No.")
-  let siblingName = 'This person has no siblings.';
+  let siblingSearch = prompt("Would you like to see the siblings of this person? Please type Yes or No.");
   let parents = []
-  let siblings = [];
+  let siblings = "";
 
   if (siblingSearch == "yes" || siblingSearch == "Yes") {
     for (let i = 0; i < people.length; i++) {
@@ -186,10 +185,16 @@ function siblingOfFoundPerson(people, person) {
 
     for (let i = 0; i < people.length; i++) {
       if(people[i].parents.includes(parents[0]) ){
-        siblings.push(people[i])
+        siblings += people[i].firstName  + ' ' + people[i].lastName + ", ";
       }
     };
+  }else if(siblingSearch == "no" || siblingSearch == "No"){
+    return
+  }else{
+    siblingOfFoundPerson(people, person);
+    return
   }
+  alert('Siblings:  ' + siblings)
   return siblings;
 }
 
