@@ -148,15 +148,15 @@ function mainMenu(person, people) {
       displayPerson(person)
     break;
     case "family":
-      if (displayOption == "family"){
-        //getFamily(people, person)
+        // TODO: get person's family
+        console.log(spouseOfFoundPerson(people, person))
         console.log(siblingOfFoundPerson(people, person))
-      } // TODO: get person's family
+        console.log(parentsOfFoundPerson(people, person))
     break;
 
     case "descendants":
-    // TODO: get person's descendants
-    console.log(getDescendants(people, person))
+      // TODO: get person's descendants
+      console.log(getDescendants(people, person))
     break;
 
     case "restart":
@@ -175,7 +175,6 @@ function mainMenu(person, people) {
   }
 }
 
-
 function spouseOfFoundPerson(people, person) {
   person[0].currentSpouse
   let spouseSearch = prompt("Would you like to see the spouse of this person? Please type Yes or No.")
@@ -190,19 +189,17 @@ function spouseOfFoundPerson(people, person) {
   return spouseName;
 }
 
-
 function siblingOfFoundPerson(people, person) {
   
   let siblingSearch = prompt("Would you like to see the siblings of this person? Please type Yes or No.")
   let siblingName = 'This person has no siblings.';
-  let parents = [1231, 564654]
+  let parents = []
   let siblings = [];
 
   if (siblingSearch == "yes" || siblingSearch == "Yes") {
     
     for (let i = 0; i < people.length; i++) {
       if(person[0].parents.includes(people[i].id)){
-
         //get the parents Id
         parents.push(people[i].id)
       }
@@ -215,11 +212,31 @@ function siblingOfFoundPerson(people, person) {
     };
 
   }
-  console.log(siblings)
+  return siblings;
 }
 
+function parentsOfFoundPerson(people, person){
+  person = person[0].parents
+  let foundParents = []
+  if (person.length > 0){
+    let parentSearch = prompt("Would you like to see the parents of this person? Please type Yes or No. ");
+     if (parentSearch == "yes" || parentSearch == "Yes"){
+      for (let i = 0; i < people.length; i++){
+        for(let p = 0; p < person.length; p++){
+          if (people[i].id === person[p]){
+            let parentsName = people[i].firstName + " " + people[i].lastName;
+            foundParents.push(parentsName);
+          }
+        }    
+      } 
+    } 
+  } else {
+    foundParents = ("Sorry, there are no parents to find.");
+  }
+  return foundParents;
+}
 
-  // TODO: find the person using the name they entered
+// TODO: find the person using the name they entered
 function searchByName(people) {
   let firstName = promptFor("What is the person's first name?", chars).toLowerCase();
   let lastName = promptFor("What is the person's last name?", chars).toLowerCase();
