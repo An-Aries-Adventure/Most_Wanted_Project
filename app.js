@@ -10,6 +10,8 @@ function app(people) {
   switch (searchType) {
     case 'yes':
       searchResults = searchByName(people);
+      // Call the mainMenu function ONLY after you find the SINGLE person you are looking for
+      mainMenu(searchResults, people);
       break;
     case 'no':
       // TODO: search by traits.
@@ -20,8 +22,6 @@ function app(people) {
       break;
   }
 
-  // Call the mainMenu function ONLY after you find the SINGLE person you are looking for
-  mainMenu(searchResults, people);
 }
 
 function searchByTraits(people){
@@ -56,37 +56,32 @@ function searchByTraits(people){
     //search by criteria
     if(displayOption == 1 && searchByGender && searchByEyeColor){
       if( people[i].gender == searchByGender && people[i].eyeColor == searchByEyeColor){
-        foundPeopleTraits.push(people[i]);
+
+        people[i].firstName
+        foundPeopleTraits.push({
+          fullName : people[i].firstName + ' ' + people[i].lastName,
+          eyeColor : people[i].eyeColor,
+          gender : people[i].gender
+        });
       }
     }
 
     //search by name
     if(displayOption == 2){
       if(people[i].firstName === searchPerson || people[i].lastName === searchPerson){
-        foundPeopleTraits.push(people[i]);
+        foundPeopleTraits.push({
+          fullName : people[i].firstName + ' ' + people[i].lastName,
+          eyeColor : people[i].eyeColor,
+          gender : people[i].gender
+        });
       }
     }
   }
 
   console.log('Total record found: ', foundPeopleTraits)
   let results = JSON.stringify(foundPeopleTraits);
-  results = results.length === 0 ? results : 'No results found';
-
   alert(results);
-}
-
-
-function siblingOfFoundPerson(people, person) {
-  let siblingSearch = prompt("Would you like to see the siblings of this person? Please type Yes or No.")
-  let siblingName = 'This person has no siblings.';
-  if (siblingSearch == "yes" || siblingSearch == "Yes") {
-    for (let i = 0; i < people.length; i++) {
-      if (people[i].parents == person[0].parents) {
-        siblingName = people[i].firstName + " " + people[i].lastName;
-        console.log(people[i])
-      }
-    };
-  }
+  
 }
 
 let getDescendants = function(people, person, count = people.length - 1, descendants = []) {
@@ -97,15 +92,21 @@ let getDescendants = function(people, person, count = people.length - 1, descend
   if (count > 0) {
       if(people[count].parents.includes(userId)){
         let descendentFound = people[count].firstName + ' ' + people[count].lastName;
-        descendants.push({children:descendentFound, currentSpouce: [people[count].currentSpouse]});
+        descendants.push({children:descendentFound, currentSpouce: people[count].currentSpouse});
       }
       
       return getDescendants(people, person, count - 1, descendants);
-  } else if(descendants.currentSpouce && descendants.currentSpouce.length > 0){
-    
-    return getDescendants(people, person, people, descendants);
   } else {
-    console.log(descendants)
+
+    for(let i = 0; i < people.length; i++){
+      for(let p = 0; p < descendants.length; p++){
+        if(people[i].parents.includes(descendants[p].currentSpouce)){
+          let descendentFound = people[i].firstName + ' ' + people[i].lastName;
+            descendants.push({children:descendentFound});
+        }
+    }
+  }
+
     return descendants;
   }
 
@@ -134,7 +135,6 @@ function mainMenu(person, people) {
 
   /* Here we pass in the entire person object that we found in our search, as well as the entire original dataset of people. We need people in order to find descendants and other information that the user may want. */
 
-  
   if (!person || !person[0]) {
     alert("Could not find that individual.");
     return app(people); // restart
