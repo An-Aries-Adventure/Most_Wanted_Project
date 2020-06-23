@@ -258,8 +258,8 @@ function parentsOfFoundPerson(people, person){
         for(let p = 0; p < person.length; p++){
 
           if (people[i].id === person[p]){
-            let firstParentsName = people[i].firstName + " " + people[i].lastName;
-            foundParents.push(firstParentsName)
+            let parentsName = people[i].firstName + " " + people[i].lastName;
+            foundParents.push(parentsName)
           }
 
         }    
