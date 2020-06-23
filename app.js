@@ -112,24 +112,6 @@ let getDescendants = function(people, person, count = people.length - 1, descend
 
 };
 
-let getDescendants_original = function(people, person, count = people.length - 1, descendants = "") {
-
-  //get value from the person you are searching
-  let userId = person[0].id;
-
-  if (count > 0) {
-      if(people[count].parents.includes(userId)){
-        let descendentFound = people[count].firstName + ' ' + people[count].lastName + ', ';
-        descendants += descendentFound;
-      }
-      
-      return getDescendants(people, person, count - 1, descendants);
-  } else {
-      return descendants;
-  }
-
-};
-
 // Menu function to call once you find who you are looking for
 function mainMenu(person, people) {
 
