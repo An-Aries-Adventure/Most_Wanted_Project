@@ -21,7 +21,6 @@ function app(people) {
       app(people); // restart app
       break;
   }
-
 }
 
 function searchByTraits(people){
@@ -31,7 +30,6 @@ function searchByTraits(people){
   let searchPerson;
   let searchByGender;
   let searchByEyeColor;
-  
   let displayOption = prompt("Press 1 to search by criteria or press 2 to search by name.");
 
   switch (displayOption) {
@@ -56,7 +54,6 @@ function searchByTraits(people){
     //search by criteria
     if(displayOption == 1 && searchByGender && searchByEyeColor){
       if( people[i].gender == searchByGender && people[i].eyeColor == searchByEyeColor){
-
         people[i].firstName
         foundPeopleTraits.push({
           fullName : people[i].firstName + ' ' + people[i].lastName,
@@ -81,35 +78,29 @@ function searchByTraits(people){
   console.log('Total record found: ', foundPeopleTraits)
   let results = JSON.stringify(foundPeopleTraits);
   alert(results);
-  
 }
 
 let getDescendants = function(people, person, count = people.length - 1, descendants = []) {
 
   //get value from the person you are searching
   let userId = person[0].id;
-
   if (count > 0) {
       if(people[count].parents.includes(userId)){
         let descendentFound = people[count].firstName + ' ' + people[count].lastName;
         descendants.push({children:descendentFound, currentSpouce: people[count].currentSpouse});
       }
-      
       return getDescendants(people, person, count - 1, descendants);
   } else {
-
     for(let i = 0; i < people.length; i++){
       for(let p = 0; p < descendants.length; p++){
         if(people[i].parents.includes(descendants[p].currentSpouce)){
           let descendentFound = people[i].firstName + ' ' + people[i].lastName;
-            descendants.push({children:descendentFound});
+          descendants.push({children:descendentFound});
         }
+      }
     }
-  }
-
     return descendants;
   }
-
 };
 
 // Menu function to call once you find who you are looking for
@@ -179,7 +170,6 @@ function siblingOfFoundPerson(people, person) {
   let siblings = [];
 
   if (siblingSearch == "yes" || siblingSearch == "Yes") {
-    
     for (let i = 0; i < people.length; i++) {
       if(person[0].parents.includes(people[i].id)){
         //get the parents Id
@@ -192,7 +182,6 @@ function siblingOfFoundPerson(people, person) {
         siblings.push(people[i])
       }
     };
-
   }
   return siblings;
 }
