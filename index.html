@@ -8,5 +8,26 @@
     <button onclick="app(data)">Start Searching</button>
     <script src="data.js"></script>
     <script src="app.js"></script>
+
+    <script>
+      
+// Create root for top-level node(s)
+const root = [];
+
+data.forEach(node => {
+  // No parentId means top level
+  if (!node.currentSpouse) return root.push(node);
+  
+  // Insert node as child of parent in flat array
+  const parentIndex = data.findIndex(el => el.id === node.currentSpouse);
+  if (!data[parentIndex].children) {
+    return data[parentIndex].children = [node];
+  }
+  
+  data[parentIndex].children.push(node);
+});
+
+console.log(root);
+    </script>
   </body>
 </html>

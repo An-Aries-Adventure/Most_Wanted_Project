@@ -32,14 +32,23 @@ function searchByTraits(people){
   let searchByGender;
   let searchByEyeColor;
   
-  let displayOption = parseInt(prompt("Press 1 to search by criteria or press 2 to search by name."));
+  let displayOption = prompt("Press 1 to search by criteria or press 2 to search by name.");
 
-  if(displayOption === 1){
-    searchByGender = prompt("Enter gender: ");
-    searchByEyeColor = prompt("Enter eye color: ");
-  }else if(displayOption === 2){
+  switch (displayOption) {
+    case '1':
+      // search by criteria
+      searchByGender = prompt("Enter gender: ");
+      searchByEyeColor = prompt("Enter eye color: ");
+      break;
+    case '2':
+      // search by name
     searchPerson = prompt("Enter the person's name you are searching for: ");
+      break;
+    default:
+      searchByTraits(people); // restart app
+      break;
   }
+
 
   //loop through the array and find a match
   for(let i = 0; i < people.length; i++){
@@ -61,12 +70,48 @@ function searchByTraits(people){
 
   console.log('Total record found: ', foundPeopleTraits)
   let results = JSON.stringify(foundPeopleTraits);
-  
+  results = results.length === 0 ? results : 'No results found';
+
   alert(results);
 }
 
 
-let getDescendants = function(people, person, count = people.length - 1, descendants = "") {
+function siblingOfFoundPerson(people, person) {
+  let siblingSearch = prompt("Would you like to see the siblings of this person? Please type Yes or No.")
+  let siblingName = 'This person has no siblings.';
+  if (siblingSearch == "yes" || siblingSearch == "Yes") {
+    for (let i = 0; i < people.length; i++) {
+      if (people[i].parents == person[0].parents) {
+        siblingName = people[i].firstName + " " + people[i].lastName;
+        console.log(people[i])
+      }
+    };
+  }
+}
+
+let getDescendants = function(people, person, count = people.length - 1, descendants = []) {
+
+  //get value from the person you are searching
+  let userId = person[0].id;
+
+  if (count > 0) {
+      if(people[count].parents.includes(userId)){
+        let descendentFound = people[count].firstName + ' ' + people[count].lastName;
+        descendants.push({children:descendentFound, currentSpouce: [people[count].currentSpouse]});
+      }
+      
+      return getDescendants(people, person, count - 1, descendants);
+  } else if(descendants.currentSpouce && descendants.currentSpouce.length > 0){
+    
+    return getDescendants(people, person, people, descendants);
+  } else {
+    console.log(descendants)
+    return descendants;
+  }
+
+};
+
+let getDescendants_original = function(people, person, count = people.length - 1, descendants = "") {
 
   //get value from the person you are searching
   let userId = person[0].id;
@@ -89,7 +134,8 @@ function mainMenu(person, people) {
 
   /* Here we pass in the entire person object that we found in our search, as well as the entire original dataset of people. We need people in order to find descendants and other information that the user may want. */
 
-  if (!person) {
+  
+  if (!person || !person[0]) {
     alert("Could not find that individual.");
     return app(people); // restart
   }
@@ -98,8 +144,8 @@ function mainMenu(person, people) {
 
   switch (displayOption) {
     case "info":
-      console.log(displayPerson(person));
       // TODO: get person's info
+      displayPerson(person)
     break;
     case "family":
       if (displayOption == "family"){
@@ -109,17 +155,9 @@ function mainMenu(person, people) {
     break;
 
     case "descendants":
-<<<<<<< HEAD
-      // TODO: get person's descendants
-
-
-
-      break;
-=======
     // TODO: get person's descendants
     console.log(getDescendants(people, person))
     break;
->>>>>>> 56f8e9fa93c2ac9298181d5ab74858ede64734be
 
     case "restart":
       if (displayOption == "restart"){
@@ -131,21 +169,19 @@ function mainMenu(person, people) {
       if (displayOption == "quit"){
         return mainMenu(person, people);
       }
-    // return; // stop execution
-    // default:
-    // return mainMenu(person, people); // ask again
+      return; // stop execution
+    default:
+    return mainMenu(person, people); // ask again
   }
 }
 
-
-function spouseOfFoundPerson(people, person){
+function spouseOfFoundPerson(people, person) {
   person[0].currentSpouse
   let spouseSearch = prompt("Would you like to see the spouse of this person? Please type Yes or No.")
-  let spouseName = 'This person does not have a spouse.'; 
-
-  if (spouseSearch == "yes" || spouseSearch == "Yes"){
-    for (let i = 0; i < people.length; i++){
-      if(people[i].id === person[0].currentSpouse){
+  let spouseName = 'This person does not have a spouse.';
+  if (spouseSearch == "yes" || spouseSearch == "Yes") {
+    for (let i = 0; i < people.length; i++) {
+      if (people[i].id === person[0].currentSpouse) {
         spouseName = people[i].firstName + " " + people[i].lastName;
       }
     }
@@ -154,13 +190,41 @@ function spouseOfFoundPerson(people, person){
 }
 
 
+function siblingOfFoundPerson(people, person) {
+  
+  let siblingSearch = prompt("Would you like to see the siblings of this person? Please type Yes or No.")
+  let siblingName = 'This person has no siblings.';
+  let parents = [1231, 564654]
+  let siblings = [];
+
+  if (siblingSearch == "yes" || siblingSearch == "Yes") {
+    
+    for (let i = 0; i < people.length; i++) {
+      if(person[0].parents.includes(people[i].id)){
+
+        //get the parents Id
+        parents.push(people[i].id)
+      }
+    };
+
+    for (let i = 0; i < people.length; i++) {
+      if(people[i].parents.includes(parents[0]) ){
+        siblings.push(people[i])
+      }
+    };
+
+  }
+  console.log(siblings)
+}
+
+
   // TODO: find the person using the name they entered
 function searchByName(people) {
-  let firstName = promptFor("What is the person's first name?", chars);
-  let lastName = promptFor("What is the person's last name?", chars);
+  let firstName = promptFor("What is the person's first name?", chars).toLowerCase();
+  let lastName = promptFor("What is the person's last name?", chars).toLowerCase();
 
   let foundPerson = people.filter(function (person) {
-    if (person.firstName === firstName && person.lastName === lastName) {
+    if (person.firstName.toLowerCase() === firstName && person.lastName.toLowerCase() === lastName) {
       return true;
     }
     else {
@@ -204,17 +268,9 @@ function displayPerson(person){
   personInfo += "Parents: " + person.parents + "\n"
   personInfo += "Current Spouse" + person.currentSpouse + "\n"
 
-  console.log('personInfo', personInfo)
+  console.log('info', personInfo)
+  alert(personInfo)
 }
-
-
-
-
-
-
-
-
-
 
 // function that prompts and validates user input
 function promptFor(question, valid) {
